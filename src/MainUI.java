@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 
 public class MainUI extends JFrame implements ActionListener {
 
-    static String selected_lang = "";
+    static String selected_lang = "fr";
 
     JPanel root;
     JLabel revenueLabel;
@@ -70,16 +70,16 @@ public class MainUI extends JFrame implements ActionListener {
         }
 
         // set up our language select buttons and the sublayout for them
-        JPanel langButtonPanel = new JPanel();
-        langButtonPanel.setLayout(new GridLayout(3, 1, 0, 5));
-        langButtonPanel.add(new JLabel("Select Language", JLabel.TOP));
-        for (JButton button : new JButton[] {
-                new JButton("English"),
-                new JButton("French") }) {
-            button.setActionCommand(button.getText().toLowerCase());
-            button.addActionListener(this);
-            langButtonPanel.add(button);
-        }
+        // JPanel langButtonPanel = new JPanel();
+        // langButtonPanel.setLayout(new GridLayout(3, 1, 0, 5));
+        // langButtonPanel.add(new JLabel("Select Language", JLabel.TOP));
+        // for (JButton button : new JButton[] {
+        // new JButton("English"),
+        // new JButton("French") }) {
+        // button.setActionCommand(button.getText().toLowerCase());
+        // button.addActionListener(this);
+        // langButtonPanel.add(button);
+        // }
 
         // set up our main layout
         Insets dummy = new Insets(0, 0, 0, 0);
@@ -95,8 +95,10 @@ public class MainUI extends JFrame implements ActionListener {
                 GridBagConstraints.HORIZONTAL, dummy, 0, 0));// add our sub-layout for main buttons
         root.add(devButtonPanel, new GridBagConstraints(1, 2, 1, 1, 0.15, 0.25, GridBagConstraints.CENTER,
                 GridBagConstraints.HORIZONTAL, dummy, 0, 0));// add our sub-layout for dev buttons
-        root.add(langButtonPanel, new GridBagConstraints(1, 2, 1, 1, 0.15, 0.25, GridBagConstraints.CENTER,
-                GridBagConstraints.HORIZONTAL, dummy, 0, 0));// add our sub-layout for language buttons
+        // root.add(langButtonPanel, new GridBagConstraints(1, 2, 1, 1, 0.15, 0.25,
+        // GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, dummy, 0, 0));//
+        // add our sub-layout for
+        // laguage buttons
 
         // frame parameter boilerplate code
         this.add(root); // add the main root panel to the frame
@@ -155,10 +157,10 @@ public class MainUI extends JFrame implements ActionListener {
             case "cloud save":
                 InventorySystemMain.cloudSave();
                 break;
-            case "English":
-                selected_lang = "en";
-            case "French":
-                selected_lang = "fr";
+            // case "English":
+            // selected_lang = "en";
+            // case "French":
+            // selected_lang = "fr";
             default:
                 log("Unknown command: " + command);
                 break;
