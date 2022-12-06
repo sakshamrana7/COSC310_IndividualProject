@@ -6,6 +6,11 @@ This is the public repository team 5 will be using to collaborate on the project
  - change directory to the bin folder and run `java -cp ../lib/*; InventorySystemMain`
  - note that the password for the credential check is `password` but can be changed via the UI and will be saved and encrypted in bin/InventorySystem.state
 
+ ### Explanation of API
+- **Weather:**  This is the java class which is an API to retrieve local weather (kelowna in this case). It can be used for getting to know about weather which can be a major reason and information to predict delivery delay.
+
+- **translate:** This is java class which is an API to translate UI output. Currently it translates from English to French if the user chooses French. This is an API for translation that uses Google Translate to translate the ouputs.
+
 ### Explanation of classes:
  - **InventorySystemMain:** this is the main class with the main logic, although the program is mainly event-based. It contains 10 methods that are called by event listener within the MainUI class: load, save, add, edit, order, transaction, setTime, changePassword, cloudLoad, and cloudSave. This class contains  instances of MainUI (for methods related to the GUI), JFileChooser (for opening/saving files), and ProgramState (containing LocalDate (for determining when Orders have arrived), Database (for tracking the loaded database), an arraylist of Orders (for tracking all current Orders), and a double revenue for tracking the total gain/loss of that session). This class also contains static encrypt and decrypt methods to allow the encryption and decryption of files, primarily used for encrypting ProgramState's saved output. These encrypt and decrypt methods utilize this open-source library: [jasypt](https://github.com/jasypt/jasypt)
  - **MainUI:** this is the main UI window that contains the listener that calls back to methods in InventorySystemMain. This class also contains a method for updating the visual JTable element when the backend Database instance is changed, as well as a method for updating the revenue label and returning the currently selected row. It also includes an anonymous method handler to save the current program state whenever the user closes the program.
