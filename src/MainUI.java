@@ -7,6 +7,19 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 
 public class MainUI extends JFrame implements ActionListener {
+    // Strings
+    String tools = "Tools";
+    String load = "Load";
+    String save = "Save";
+    String add = "Add";
+    String edit = "Edit";
+    String order = "Order";
+    String changepassword = "Change Password";
+    String cloudload = "Cloud Load";
+    String cloudsave = "Cloud Save";
+    String devtools = "Development Tools";
+    String transaction = "Transaction";
+    String settime = "Set Time";
 
     static String selected_lang = "fr";
 
@@ -42,81 +55,100 @@ public class MainUI extends JFrame implements ActionListener {
         // set up our main admin buttons and the sub layout for them
         JPanel mainButtonPanel = new JPanel();
         mainButtonPanel.setLayout(new GridLayout(9, 1, 0, 5));
-        mainButtonPanel.add(new JLabel("Tools", JLabel.CENTER));
-        for (JButton button : new JButton[] {
-                new JButton("Load"),
-                new JButton("Save"),
-                new JButton("Add"),
-                new JButton("Edit"),
-                new JButton("Order"),
-                new JButton("Change Password"),
-                new JButton("Cloud Load"),
-                new JButton("Cloud Save") }) {
-            button.setActionCommand(button.getText().toLowerCase());
-            button.addActionListener(this);
-            mainButtonPanel.add(button);
-        }
+        if (selected_lang == "fr") {
+            mainButtonPanel.add(new JLabel(translate.translate(tools, selected_lang, "en"), JLabel.CENTER));
+        } else
+            mainButtonPanel.add(new JLabel(tools, JLabel.CENTER));
 
-        // set up our dev tool buttons and the sublayout for them
-        JPanel devButtonPanel = new JPanel();
-        devButtonPanel.setLayout(new GridLayout(3, 1, 0, 5));
-        devButtonPanel.add(new JLabel("Dev Tools", JLabel.CENTER));
-        for (JButton button : new JButton[] {
-                new JButton("Transaction"),
-                new JButton("Set Time") }) {
-            button.setActionCommand(button.getText().toLowerCase());
-            button.addActionListener(this);
-            devButtonPanel.add(button);
-        }
-
-        // set up our language select buttons and the sublayout for them
-        // JPanel langButtonPanel = new JPanel();
-        // langButtonPanel.setLayout(new GridLayout(3, 1, 0, 5));
-        // langButtonPanel.add(new JLabel("Select Language", JLabel.TOP));
-        // for (JButton button : new JButton[] {
-        // new JButton("English"),
-        // new JButton("French") }) {
-        // button.setActionCommand(button.getText().toLowerCase());
-        // button.addActionListener(this);
-        // langButtonPanel.add(button);
-        // }
-
-        // set up our main layout
-        Insets dummy = new Insets(0, 0, 0, 0);
-        root.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        root.setLayout(new GridBagLayout()); // create a gridbaglayout and set it as the root panel's layout manager
-        root.add(revenueLabel, new GridBagConstraints(0, 0, 1, 1, 0.85, 0.1, GridBagConstraints.CENTER,
-                GridBagConstraints.BOTH, dummy, 0, 0));// add dataPath label
-        root.add(new JScrollPane(dataTable), new GridBagConstraints(0, 1, 1, 1, 0.85, 0.6, GridBagConstraints.CENTER,
-                GridBagConstraints.BOTH, dummy, 0, 0));// add dataTable table
-        root.add(new JScrollPane(consoleOutput), new GridBagConstraints(0, 2, 1, 1, 0.85, 0.3,
-                GridBagConstraints.CENTER, GridBagConstraints.BOTH, dummy, 300, 100));// add our console log textbox
-        root.add(mainButtonPanel, new GridBagConstraints(1, 0, 1, 2, 0.15, .75, GridBagConstraints.CENTER,
-                GridBagConstraints.HORIZONTAL, dummy, 0, 0));// add our sub-layout for main buttons
-        root.add(devButtonPanel, new GridBagConstraints(1, 2, 1, 1, 0.15, 0.25, GridBagConstraints.CENTER,
-                GridBagConstraints.HORIZONTAL, dummy, 0, 0));// add our sub-layout for dev buttons
-        // root.add(langButtonPanel, new GridBagConstraints(1, 2, 1, 1, 0.15, 0.25,
-        // GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, dummy, 0, 0));//
-        // add our sub-layout for
-        // laguage buttons
-
-        // frame parameter boilerplate code
-        this.add(root); // add the main root panel to the frame
-        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        this.addWindowListener(new WindowAdapter() { // when user wants to close, do this instead
-            public void windowClosing(WindowEvent e) {
-                // save current table/db contents to the csv then save current state
-                Database.saveCSV(state.db.filepath, state.db.products);
-                state.save();
-                e.getWindow().dispose(); // now close the frame
+        if (selected_lang == "fr") {
+            for (JButton button : new JButton[] {
+                    new JButton(translate.translate(load, selected_lang, "en")),
+                    new JButton(translate.translate(save, selected_lang, "en")),
+                    new JButton(translate.translate(add, selected_lang, "en")),
+                    new JButton(translate.translate(edit, selected_lang, "en")),
+                    new JButton(translate.translate(order, selected_lang, "en")),
+                    new JButton(translate.translate(changepassword, selected_lang, "en")),
+                    new JButton(translate.translate(cloudload, selected_lang, "en")),
+                    new JButton(translate.translate(cloudsave, selected_lang, "en")) }) {
+                button.setActionCommand(button.getText().toLowerCase());
+                button.addActionListener(this);
+                mainButtonPanel.add(button);
             }
-        });
-        this.setResizable(false);
-        if (!selected_lang.equals("en")) {
-            this.setTitle(translate.translate("Team 5: Inventory System", selected_lang, "en"));
-        } else {
-            this.setTitle("Team 5: Inventory System");
-        }
+        } else
+            for (JButton button : new JButton[] {
+                    new JButton(load),
+                    new JButton(save),
+                    new JButton(add),
+                    new JButton(edit),
+                    new JButton(order),
+                    new JButton(changepassword),
+                    new JButton(cloudload),
+                    new JButton(cloudsave) }) {
+                button.setActionCommand(button.getText().toLowerCase());
+                button.addActionListener(this);
+                mainButtonPanel.add(button);
+
+                // set up our dev tool buttons and the sublayout for them
+                JPanel devButtonPanel = new JPanel();
+                devButtonPanel.setLayout(new GridLayout(3, 1, 0, 5));
+                if (selected_lang == "fr") {
+                    devButtonPanel.add(new JLabel(translate.translate(devtools, selected_lang, "en"), JLabel.CENTER));
+                } else
+                    devButtonPanel.add(new JLabel(devtools, JLabel.CENTER));
+
+                if (selected_lang == "fr") {
+                    for (JButton newbutton : new JButton[] {
+                            new JButton(translate.translate(transaction, selected_lang, "en")),
+                            new JButton(translate.translate(settime, selected_lang, "en")) }) {
+                        newbutton.setActionCommand(button.getText().toLowerCase());
+                        newbutton.addActionListener(this);
+                        devButtonPanel.add(newbutton);
+                    }
+                } else
+                    for (JButton newbutton : new JButton[] {
+                            new JButton(transaction),
+                            new JButton(settime) }) {
+                        newbutton.setActionCommand(button.getText().toLowerCase());
+                        newbutton.addActionListener(this);
+                        devButtonPanel.add(newbutton);
+                    }
+
+                // set up our main layout
+                Insets dummy = new Insets(0, 0, 0, 0);
+                root.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+                root.setLayout(new GridBagLayout()); // create a gridbaglayout and set it as the root panel's layout
+                                                     // manager
+                root.add(revenueLabel, new GridBagConstraints(0, 0, 1, 1, 0.85, 0.1, GridBagConstraints.CENTER,
+                        GridBagConstraints.BOTH, dummy, 0, 0));// add dataPath label
+                root.add(new JScrollPane(dataTable),
+                        new GridBagConstraints(0, 1, 1, 1, 0.85, 0.6, GridBagConstraints.CENTER,
+                                GridBagConstraints.BOTH, dummy, 0, 0));// add dataTable table
+                root.add(new JScrollPane(consoleOutput), new GridBagConstraints(0, 2, 1, 1, 0.85, 0.3,
+                        GridBagConstraints.CENTER, GridBagConstraints.BOTH, dummy, 300, 100));// add our console log
+                                                                                              // textbox
+                root.add(mainButtonPanel, new GridBagConstraints(1, 0, 1, 2, 0.15, .75, GridBagConstraints.CENTER,
+                        GridBagConstraints.HORIZONTAL, dummy, 0, 0));// add our sub-layout for main buttons
+                root.add(devButtonPanel, new GridBagConstraints(1, 2, 1, 1, 0.15, 0.25, GridBagConstraints.CENTER,
+                        GridBagConstraints.HORIZONTAL, dummy, 0, 0));// add our sub-layout for dev buttons
+
+                // frame parameter boilerplate code
+                this.add(root); // add the main root panel to the frame
+                this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                this.addWindowListener(new WindowAdapter() { // when user wants to close, do this instead
+                    public void windowClosing(WindowEvent e) {
+                        // save current table/db contents to the csv then save current state
+                        Database.saveCSV(state.db.filepath, state.db.products);
+                        state.save();
+                        e.getWindow().dispose(); // now close the frame
+                    }
+                });
+                this.setResizable(false);
+                // if (!selected_lang.equals("en")) {
+                // this.setTitle(translate.translate("Team 5: Inventory System", selected_lang,
+                // "en"));
+                // } else {
+                this.setTitle("Équipe 5 : Système d'inventaire");
+            }
         this.pack();
         this.setLocation(750, 300);
         this.setVisible(true); // actually show the window
@@ -157,10 +189,6 @@ public class MainUI extends JFrame implements ActionListener {
             case "cloud save":
                 InventorySystemMain.cloudSave();
                 break;
-            // case "English":
-            // selected_lang = "en";
-            // case "French":
-            // selected_lang = "fr";
             default:
                 log("Unknown command: " + command);
                 break;

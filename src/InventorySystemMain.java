@@ -1,7 +1,11 @@
+import javax.lang.model.util.ElementScanner14;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileSystemView;
 import java.io.*;
+import java.util.Arrays;
+import java.util.Scanner;
+
 import org.jasypt.util.text.*;
 
 public class InventorySystemMain {
@@ -9,8 +13,24 @@ public class InventorySystemMain {
     static JFileChooser fileDialog;
     static ProgramState state;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        // Stringsf
+        Character ans;
+        Scanner scanner = new Scanner(System.in);
         state = new ProgramState(); // load previous state
+
+        System.out.println("Welcome to Inventory Management !! ");
+        System.out.println("Today it's " + Arrays.toString(Weather.getWeather()) + " *C outside!! ");
+        System.out.println("Please enter 'E' for english and 'F' for French!! ");
+        ans = scanner.next().charAt(0);
+        if (ans == 'F') {
+            MainUI.selected_lang = "fr";
+            System.out.println("System language set to French! ");
+        } else if (ans == 'E') {
+            MainUI.selected_lang = "en";
+            System.out.println("System language set to English! ");
+        } else
+            System.out.println("Please select one of the correct languages! ");
 
         // password check, commented out for now because testing easier
         PasswordUI passwordDialog = new PasswordUI(state.password, false); // thread will wait until passwordDialog is
