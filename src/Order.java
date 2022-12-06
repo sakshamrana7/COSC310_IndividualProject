@@ -5,6 +5,7 @@ public class Order {
     int quantity;
     LocalDate date;
     boolean isActive;
+
     public Order(Product _product, int _quantity, LocalDate _date) {
         this.product = _product;
         this.quantity = _quantity;
@@ -27,13 +28,14 @@ public class Order {
             original.setCurrentStock(total);
             ui.updateRows(db);
             ui.log("Order of " + quantity + " '" + product.getName() + "' has been received.");
-    
+
             isActive = false;
         }
     }
 
     @Override
     public String toString() {
-        return String.format("Order is for %d of product '%s' and was placed on %s.", quantity, product.getName(), date.toString());
+        return String.format("Order is for %d of product '%s' and was placed on %s.", quantity, product.getName(),
+                date.toString());
     }
 }

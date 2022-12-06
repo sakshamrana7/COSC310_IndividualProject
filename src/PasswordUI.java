@@ -27,7 +27,7 @@ public class PasswordUI extends JDialog implements ActionListener {
         input = new JPasswordField();
         input.setPreferredSize(new Dimension(270, 50));
         input.setFont(input.getFont().deriveFont(18f));
-        JButton submitButton = new JButton("Submit");
+        JButton submitButton = new JButton("Soumettre");
         submitButton.setActionCommand("submit");
         submitButton.addActionListener(this);
 
